@@ -1,0 +1,368 @@
+:root {
+    --primary-color: #FF5722; /* Firebolt Orange */
+    --secondary-color: #2c3e50;
+    --text-color: #333;
+    --bg-color: #ffffff;
+    --section-bg: #f9f9f9;
+    --code-bg: #1e1e1e;
+    --code-text: #d4d4d4;
+    --link-color: #007bff;
+    --border-color: #e0e0e0;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+[data-theme="dark"] {
+    --primary-color: #FF7043;
+    --secondary-color: #ecf0f1;
+    --text-color: #f5f5f5;
+    --bg-color: #121212;
+    --section-bg: #1e1e1e;
+    --border-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+.version-switch {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    gap: 10px;
+    border-left: 1px solid var(--border-color);
+    padding-left: 15px;
+}
+
+.version {
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.version.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.version.inactive {
+    color: #888;
+}
+
+/* Hero Section */
+#hero {
+    padding: 100px 0;
+    text-align: center;
+    background: linear-gradient(135deg, #fff5f2 0%, #fff 100%);
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Sections */
+.section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-top: -30px;
+    margin-bottom: 40px;
+}
+
+/* Features Grid */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.card {
+    background: var(--bg-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+/* Architecture */
+.architecture-diagram img {
+    width: 100%;
+    max-width: 900px;
+    display: block;
+    margin: 0 auto 40px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.architecture-details {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--section-bg);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.architecture-details ul {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.architecture-details li {
+    margin-bottom: 10px;
+}
+
+.note {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 20px;
+}
+
+/* Benchmarks Table */
+.table-wrapper {
+    overflow-x: auto;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: var(--section-bg);
+    font-weight: 600;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.score-col {
+    text-align: right;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Usage Code Block */
+.code-block {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.center-btn {
+    text-align: center;
+}
+
+/* Extensibility / Roadmap */
+.roadmap-card {
+    background: linear-gradient(135deg, #FF5722 0%, #FF8A65 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.roadmap-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    padding: 40px 0;
+    background: var(--section-bg);
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .version-switch {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    #hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebolt-VL: Efficient Vision-Language Understanding</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Firebolt-VL: An efficient vision-language model designed for fast multimodal reasoning and practical deployment.">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Firebolt-VL</a>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                    <li><a href="#benchmarks">Benchmarks</a></li>
+                    <li><a href="#usage">Usage</a></li>
+                    <li><a href="https://github.com/huyquoctrinh/Firebolt-VL" target="_blank" class="github-link">GitHub</a></li>
+                </ul>
+            </nav>
+            <div class="version-switch">
+                <span class="version active">V1</span>
+                <span class="version inactive" title="V2 is currently under active development">V2 (Dev)</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>Efficient Vision-Language Understanding with <span class="highlight">Cross-Modality Modulation</span></h1>
+            <p class="subtitle">Fast multimodal reasoning, fine-grained visual grounding, and practical deployment ready.</p>
+            <div class="cta-group">
+                <a href="https://github.com/huyquoctrinh/Firebolt-VL" class="btn primary">View on GitHub</a>
+                <a href="assets/firebolt_paper.pdf" class="btn secondary" target="_blank">Read Paper</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="icon">⚡</div>
+                    <h3>Efficient Inference</h3>
+                    <p>Replaces heavy cross-attention fusion with a lightweight Cross-modal Modulator (CMM) and state-space modeling for fast generation.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🎯</div>
+                    <h3>Fine-grained Grounding</h3>
+                    <p>Computes token–grid correlations and uses Top-K grid selection so each text token focuses on the most relevant visual regions.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🧩</div>
+                    <h3>Cross-modality Modulation</h3>
+                    <p>Uses Feature-wise Linear Modulation (FiLM) to inject image-conditioned signals into text features without quadratic attention overhead.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="section architecture-section">
+        <div class="container">
+            <h2 class="section-title">Architecture</h2>
+            <div class="architecture-diagram">
+                <img src="assets/firebolt_architecture.png" alt="Firebolt-VL Architecture Diagram">
+            </div>
+            <div class="architecture-details">
+                <p><strong>Main Components:</strong></p>
+                <ul>
+                    <li>🎨 <strong>Vision Encoder (SigLIP)</strong> – extracts grid-level visual embeddings</li>
+                    <li>🧩 <strong>Cross-modal Modulator (CMM)</strong> – token–grid correlation → FiLM → SSM → FiLM</li>
+                    <li>🧠 <strong>Language Decoder (LFM2-350M-based)</strong> – multimodal reasoning and response generation</li>
+                </ul>
+                <p class="note">Training follows a two-stage recipe: (1) CMM warm-up with frozen backbones, and (2) end-to-end training.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="benchmarks" class="section">
+        <div class="container">
+            <h2 class="section-title">Benchmark Results</h2>
+            <p class="section-subtitle">Total parameters: ~0.8B</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Benchmark</th>
+                            <th>Split</th>
+                            <th class="score-col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>VQAv2</td><td>Test</td><td class="score-col">76.6</td></tr>
+                        <tr><td>POPE</td><td>Test</td><td class="score-col">69.4</td></tr>
+                        <tr><td>AI2D</td><td>Test</td><td class="score-col">46.2</td></tr>
+                        <tr><td>MMMU-val</td><td>Val</td><td class="score-col">26.4</td></tr>
+                        <tr><td>MME (Perception)</td><td>-</td><td class="score-col">1376.2</td></tr>
+                        <tr><td>SQA-Image</td><td>Test</td><td class="score-col">56.7</td></tr>
+                        <tr><td>MMB-dev</td><td>Dev</td><td class="score-col">64.6</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="section">
+        <div class="container">
+            <h2 class="section-title">Usage</h2>
+            <p>Minimal inference example template:</p>
+            <div class="code-block">
+<pre><code>import torch
+from PIL import Image
+from transformers import AutoTokenizer, AutoProcessor
+from modeling.model import FireboltLMForCausalLM
+
+# ... (See full example in repo) ...
+
+if __name__ == "__main__":
+    print(generate_answer(
+        ckpt_dir="YOUR_CKPT",
+        tokenizer_path="YOUR_TOKENIZER",
+        processor_path="YOUR_PROCESSOR",
+        image_path="demo.jpg",
+        question="What is the destination city searched in this image?"
+    ))</code></pre>
+            </div>
+            <div class="center-btn">
+                <a href="https://github.com/huyquoctrinh/Firebolt-VL" class="btn primary">See Full Usage Guide</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="extensibility" class="section extensibility-section">
+        <div class="container">
+            <h2 class="section-title">Roadmap</h2>
+            <div class="roadmap-card">
+                <h3>🚀 Firebolt-VL V2</h3>
+                <p>Active development is underway for V2, focusing on even greater efficiency and broader multimodal capabilities. Stay tuned!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Firebolt-VL Project. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <p>Acknowledgements: Liquid Foundation Model (LFM2-350M), SigLIP.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
