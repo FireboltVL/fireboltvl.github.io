@@ -14,5 +14,6 @@ Firebolt-VL is a novel vision-language model designed for fast multimodal reason
 
 ## Resources
 
-*   **📄 Paper**: [Read the Research Paper](assets/firebolt_paper.pdf)
+*   **📄 Paper**: *To be released (Under review @ CVPR Workshop)*
+*   **🤗 HuggingFace**: *To be released*
 *   **💻 Code**: [Main Repository](https://github.com/huyquoctrinh/Firebolt-VL)
