@@ -28,8 +28,8 @@
                     <li><a href="#architecture">Architecture</a></li>
                     <li><a href="#benchmarks">Benchmarks</a></li>
                     <li><a href="#usage">Usage</a></li>
-                    <li><a href="https://github.com/huyquoctrinh/Firebolt-VL" target="_blank"
-                            class="github-link">GitHub</a></li>
+                    <li><span class="github-link disabled" title="Coming Soon"
+                            style="opacity: 0.6; cursor: not-allowed;">GitHub (Coming Soon)</span></li>
                 </ul>
             </nav>
             <div class="version-switch">
@@ -46,7 +46,7 @@
             <p class="subtitle">Fast multimodal reasoning, fine-grained visual grounding, and practical deployment
                 ready.</p>
             <div class="cta-group">
-                <a href="https://github.com/huyquoctrinh/Firebolt-VL" class="btn primary">View on GitHub</a>
+                <span class="btn primary disabled" style="opacity: 0.6; cursor: not-allowed;">Code (Coming Soon)</span>
                 <span class="btn secondary disabled" style="opacity: 0.6; cursor: not-allowed;">Paper (Coming
                     Soon)</span>
                 <span class="btn secondary disabled" style="opacity: 0.6; cursor: not-allowed;">HuggingFace (Coming
@@ -166,9 +166,9 @@
 from PIL import Image
 from transformers import AutoTokenizer, AutoProcessor
 from modeling.model import FireboltLMForCausalLM
-
+ 
 # ... (See full example in repo) ...
-
+ 
 if __name__ == "__main__":
     print(generate_answer(
         ckpt_dir="YOUR_CKPT",
@@ -179,7 +179,8 @@ if __name__ == "__main__":
     ))</code></pre>
             </div>
             <div class="center-btn">
-                <a href="https://github.com/huyquoctrinh/Firebolt-VL" class="btn primary">See Full Usage Guide</a>
+                <span class="btn primary disabled" style="opacity: 0.6; cursor: not-allowed;">Usage Guide (Coming
+                    Soon)</span>
             </div>
         </div>
     </section>
@@ -201,6 +202,7 @@ if __name__ == "__main__":
                 <p>&copy; 2026 Firebolt-VL Project. All rights reserved.</p>
             </div>
             <div class="footer-right">
+                <p>Contact: <a href="mailto:fireboltvlm@gmail.com">fireboltvlm@gmail.com</a></p>
                 <p>Acknowledgements: Liquid Foundation Model (LFM2-350M), SigLIP.</p>
             </div>
         </div>
