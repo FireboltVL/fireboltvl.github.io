@@ -168,4 +168,58 @@ document.addEventListener('DOMContentLoaded', () => {
             header.style.boxShadow = 'none';
         }
     });
+
+    // Copy to Clipboard logic
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach(btn => {
+        // Create toast element
+        const toast = document.createElement('span');
+        toast.className = 'copy-toast';
+        toast.textContent = 'Copied!';
+        btn.parentElement.appendChild(toast);
+
+        btn.addEventListener('click', () => {
+            const codeBlock = btn.parentElement.querySelector('code');
+            if (codeBlock) {
+                const textToCopy = codeBlock.innerText;
+
+                const showSuccess = () => {
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-copy', 'far');
+                        icon.classList.add('fa-check', 'fas');
+                    }
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        if (icon) {
+                            icon.classList.remove('fa-check', 'fas');
+                            icon.classList.add('fa-copy', 'far');
+                        }
+                        toast.classList.remove('show');
+                    }, 2000);
+                };
+
+                // Use Clipboard API if available, else fallback
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(textToCopy).then(showSuccess).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+                } else {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = textToCopy;
+                    textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        showSuccess();
+                    } catch (err) {
+                        console.error('Fallback copy failed', err);
+                    }
+                    document.body.removeChild(textarea);
+                }
+            }
+        });
+    });
 });
